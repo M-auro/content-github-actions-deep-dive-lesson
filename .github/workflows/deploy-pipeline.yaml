@@ -60,6 +60,8 @@ jobs:
           body: New release for ${{ github.run_number }}. Release notes can be found in the docs.
           draft: false
           prerelease: false
+      - name: Set release URL
+        run: echo "UPLOAD_URL=${{ steps.create_release.outputs.upload_url }}" >> $GITHUB_ENV
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -69,11 +71,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ env.UPLOAD_URL }}
           asset_path: ./${{ github.sha }}.zip
           asset_name: source_code_with_libraries.zip
           asset_content_type: application/zip
-
 
 
 
