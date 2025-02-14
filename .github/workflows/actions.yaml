@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zip-bundle
-          path: ../${{ github.sha }}.zip
+          path: ${{ github.workspace }}/${{ github.sha }}.zip
 
   upload:
     runs-on: ubuntu-latest
