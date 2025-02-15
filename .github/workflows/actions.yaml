@@ -55,13 +55,14 @@ jobs:
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws-region: us-east-1
       - name: Update Function code
-        run: aws lambda update-function-code \
-               --function-name mauro-lambda-function \
-               --s3-bucket mauro-github-actions-bucket \
-               --s3-key ${{ github.sha }}.zip \
-               --publish
+        run: |
+          aws lambda update-function-code \
+            --function-name mauro-lambda-function \
+            --s3-bucket mauro-github-actions-bucket \
+            --s3-key ${{ github.sha }}.zip \
+            --publish
 
-               
+
 
 
 
