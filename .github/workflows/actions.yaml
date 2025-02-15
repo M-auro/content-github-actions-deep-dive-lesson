@@ -44,4 +44,24 @@ jobs:
       - name: Upload to S3
         run: aws s3 cp "${{ github.workspace }}/${{ github.sha }}.zip" "s3://mauro-github-actions-bucket/${{ github.sha }}.zip"
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps: 
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: us-east-1
+      - name: Update Function code
+        run: aws lambda update-function-code \
+               --function-name mauro-lambda-function \
+               --s3-bucket mauro-github-actions-bucket \
+               --s3-key ${{ github.sha }}.zip \
+               --publish
+
+               
+
+
 
