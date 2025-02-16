@@ -15,7 +15,7 @@ def lambda_handler(event):
             raise ValueError("Missing 'input' in event")
         if event["input"] == "Hello":
             return "World"
-        elif event["input"] == "Hi":
+        if event["input"] == "Hi":
             return "World"
         else:
             raise ValueError("Invalid input")
