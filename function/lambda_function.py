@@ -9,10 +9,15 @@ def lambda_handler(event, context):
         string: greeting response
     """
     print('Starting functions\n---------------------------------------------')
+    print(f"Received event: {event}")
 
-    if event["input"] == "Hello":
-        return "World"
-    elif event["input"] == "Hi":
-        return "World"
-    else:
-        raise ValueError("Invalid input")
+    try:
+        if event["input"] == "Hello":
+            return "World"
+        elif event["input"] == "Hi":
+            return "World"
+        else:
+            raise ValueError("Invalid input")
+    except Exception as e:
+        print(f"Error: {e}")
+        raise e
