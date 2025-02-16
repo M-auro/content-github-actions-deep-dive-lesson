@@ -92,8 +92,8 @@ jobs:
             if grep -q "Error" out; then 
                 exit1
             fi  
-      - name: Wait 30 seconds
-        run: sleep 30
+      - name: Wait 60 seconds
+        run: sleep 60
       - name: Destroy test function
         if: ${{ always() }}
         run: aws lambda delete-function --function-name test-function-${{ matrix.input }}
