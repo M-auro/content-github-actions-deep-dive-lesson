@@ -12,7 +12,7 @@ def lambda_handler(event, context):
 
     if event["input"] == "Hello":
         return "World"
-    if event["input"] == "Hi":
+    elif event["input"] == "Hi":
         return "World"
     else:
         raise ValueError("Invalid input")
