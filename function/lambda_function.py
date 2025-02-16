@@ -13,7 +13,8 @@ def lambda_handler(event, context):
 
     try:
         if "input" not in event:
-            raise ValueError("Missing 'input' in event")     
+            raise ValueError("Missing 'input' in event")
+        
         if event["input"] == "Hello":
             return "World"
         elif event["input"] == "Hi":
@@ -23,3 +24,4 @@ def lambda_handler(event, context):
     except Exception as e:
         print(f"Error: {e}")
         raise e
+    
