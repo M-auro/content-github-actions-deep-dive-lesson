@@ -96,7 +96,7 @@ jobs:
         run: sleep 30
       - name: Destroy test function
         if: ${{ always() }}
-        run: aws lambda delete-function --function-name test-function
+        run: aws lambda delete-function --function-name test-function-${{ matrix.input }}
 
   deploy:
     runs-on: ubuntu-latest
