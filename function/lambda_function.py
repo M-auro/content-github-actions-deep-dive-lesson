@@ -1,6 +1,6 @@
 # from github import Github
 
-def lambda_handler(event, context):
+def lambda_handler(event):
     """Lambda function wrapper
     Args:
         event: trigger event dict
