@@ -75,18 +75,17 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name : Create test function
-        run: |  
-          aws lambda create-function --function-name test-function \  
-            --code S3Bucket=mauro-github-actions-bucket,S3Key=${{ github.sha }}.zip \  
-            --handler lambda_function.lambda_handler --runtime python3.8 \  
-            --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/service-role/mauro-lambda-function-role-l78v2tws  
-      - name: Wait 30 seconds  
-        run: sleep 30  
-      - name: Destroy test function  
-        if: ${{ always() }}  
+      - name: Create test function
+        run: |
+          aws lambda create-function --function-name test-function \
+            --code S3Bucket=mauro-github-actions-bucket,S3Key=${{ github.sha }}.zip \
+            --handler lambda_function.lambda_handler --runtime python3.8 \
+            --role arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/service-role/mauro-lambda-function-role-l78v2tws
+      - name: Wait 30 seconds
+        run: sleep 30
+      - name: Destroy test function
+        if: ${{ always() }}
         run: aws lambda delete-function --function-name test-function
-
 
   deploy:
     runs-on: ubuntu-latest
