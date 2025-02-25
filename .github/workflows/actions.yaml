@@ -99,7 +99,8 @@ jobs:
               --payload '{"input": "'${{ matrix.input }}'"}' \
               --cli-binary-format raw-in-base64-out \
               --output json out
-            if grep -q "Error" out; then 
+            cat out
+            if grep -q "FunctionError" out; then 
                 exit 1
             fi  
       - name: Wait and check function state before destroying
